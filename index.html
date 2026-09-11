@@ -1,14 +1,468 @@
-<!-- Nossa História -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casamento Leandro & Laura</title>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --palha-light: #FDFBF7;
+            --palha-base: #F4EBE1;
+            --palha-dark: #E2D3C1;
+            --marrom-claro: #A67B5B;
+            --marrom-base: #6F4E37;
+            --marrom-escuro: #3D2314;
+            --texto: #2C221E;
+            --branco: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--palha-light);
+            color: var(--texto);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Tipografia */
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--marrom-escuro);
+            font-weight: 600;
+        }
+
+        .script-font {
+            font-family: 'Pinyon Script', cursive;
+            color: var(--marrom-claro);
+        }
+
+        /* NAVEGAÇÃO */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--palha-dark);
+            z-index: 1000;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav a {
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            color: var(--marrom-escuro);
+            margin: 0 10px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--marrom-claro);
+        }
+
+        /* HEADER / HERO */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(61, 35, 20, 0.3), rgba(61, 35, 20, 0.4)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: var(--branco);
+            padding: 100px 20px 40px;
+        }
+
+        header .subtitle {
+            font-size: 2rem;
+            margin-bottom: -10px;
+            color: var(--palha-base);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: var(--branco);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p.date {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 8px 25px;
+            margin-top: 15px;
+        }
+
+        /* SEÇÕES GERAIS */
+        section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--marrom-claro);
+        }
+
+        /* HISTÓRIA DO CASAL */
+        .story-content {
+            background-color: var(--branco);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--palha-dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: justify;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* LOCALIZAÇÃO */
+        .event-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            background-color: var(--palha-base);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .event-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .event-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .map-container {
+            flex: 1;
+            min-width: 280px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* CRONOGRAMA */
+        .timeline {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--marrom-claro);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: 15px 30px;
+            position: relative;
+            width: 50%;
+            background-color: inherit;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            right: -6px;
+            background-color: var(--palha-light);
+            border: 3px solid var(--marrom-base);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.right::after {
+            left: -6px;
+        }
+
+        .timeline-content {
+            padding: 15px 20px;
+            background-color: var(--branco);
+            border-radius: 6px;
+            border: 1px solid var(--palha-dark);
+        }
+
+        .timeline-time {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--marrom-base);
+            font-size: 1.1rem;
+        }
+
+        /* DRESS CODE */
+        .dress-code-box {
+            background-color: var(--marrom-escuro);
+            color: var(--palha-light);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .dress-code-box h3 {
+            color: var(--palha-base);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .warning-text {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--marrom-claro);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* RSVP SISTEMA */
+        .rsvp-container {
+            background-color: var(--branco);
+            border: 1px solid var(--palha-dark);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--palha-dark);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--marrom-claro);
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--branco);
+            border: 1px solid var(--palha-dark);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .suggestion-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--palha-base);
+        }
+
+        .suggestion-item:hover {
+            background-color: var(--palha-base);
+        }
+
+        .selected-guest {
+            background-color: var(--palha-base);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--palha-dark);
+        }
+
+        .selected-guest h4 {
+            color: var(--marrom-escuro);
+            margin-bottom: 5px;
+        }
+
+        .companions-list {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .companion-chip {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--marrom-claro);
+            color: var(--branco);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 4px;
+        }
+
+        .companion-chip span {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background-color: var(--marrom-base);
+            color: var(--branco);
+            padding: 14px 20px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--marrom-escuro);
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* RODAPÉ */
+        footer {
+            background-color: var(--marrom-escuro);
+            color: var(--palha-dark);
+            text-align: center;
+            padding: 30px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .timeline::before { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { left: 0; text-align: left; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <nav>
+        <a href="#historia">Nossa História</a>
+        <a href="#local">O Local</a>
+        <a href="#cronograma">Cronograma</a>
+        <a href="#dresscode">Dress Code</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+
+    <!-- Cabeçalho / Banner Principal -->
+    <header>
+        <span class="script-font subtitle">Nosso Casamento</span>
+        <h1>Leandro & Laura</h1>
+        <p class="date">12 . 12 . 2027</p>
+    </header>
+
+    <!-- Nossa História -->
     <section id="historia">
         <div class="section-title">
             <h2>Nossa História</h2>
         </div>
-        <div class="story-content" style="text-align: justify; line-height: 1.8;">
+        <div class="story-content">
             <p style="margin-bottom: 15px;">Antes de ser "nós", éramos só dois olhares se cruzando pelos corredores do Projeto Radical — cada um na sua correria, sem imaginar que ali começava tudo.</p>
             
             <p style="margin-bottom: 15px;">Uns dois, três meses depois, o Instagram fez o que o destino ainda estava enrolando: nos aproximou por causa de <em>Stranger Things</em> (sim, foi isso mesmo). E foi ela — anotem essa parte, porque é importante — quem tomou a iniciativa de trocar os telefones.</p>
             
-            <p style="margin-bottom: 15px;">Foi assim que o Leandro descobriu que a Laura iria à Bienal do Livro do Rio. E óbvio que ele não ia deixar ela ir sozinha. Sem pensar duas vezes, montou uma excursão inteira — van, galera, tudo organizado — só para ter uma desculpa de estar perto dela. Não ficaram grudados o day inteiro, mas não precisou: naquele dia ele já sabia. Era ela.</p>
+            <p style="margin-bottom: 15px;">Foi assim que o Leandro descobriu que a Laura iria à Bienal do Livro do Rio. E óbvio que ele não ia deixar ela ir sozinha. Sem pensar duas vezes, montou uma excursão inteira — van, galera, tudo organizado — só para ter uma desculpa de estar perto dela. Não ficaram grudados o dia inteiro, mas não precisou: naquele dia ele já sabia. Era ela.</p>
 
             <p style="margin-bottom: 15px;">Um mês de conversas todos os dias depois, veio o primeiro encontro oficial. E, para um cinéfilo de carteirinha como ele, só podia ser no cinema. A sintonia foi tão instantânea que, na semana seguinte, lá estava ele na casa dos pais da Laura pedindo permissão para namorar com ela.</p>
             
@@ -19,3 +473,287 @@
             </p>
         </div>
     </section>
+
+    <!-- Local e Horário -->
+    <section id="local">
+        <div class="section-title">
+            <h2>Cerimônia & Recepção</h2>
+        </div>
+        <div class="event-info">
+            <div class="event-text">
+                <h3>Espaço Ferreirinha</h3>
+                <p><strong>Data:</strong> Domingo, 12 de Dezembro de 2027</p>
+                <p><strong>Horário:</strong> 15h30</p>
+                <br>
+                <p><strong>Endereço:</strong></p>
+                <p>Rua Expedicionário Luis Lopes Dorneles, 2</p>
+                <p>São Gonçalo - RJ, 24756-430</p>
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.023412345678!2d-42.980000!3d-22.820000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99999999999999%3A0x0!2sRua%20Expedicion%C3%A1rio%20Luis%20Lopes%20Dorneles%2C%202%20-%20S%C3%A3o%20Gon%C3%A7alo!5e0!3m2!1spt-BR!2sbr!4v1600000000000" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cronograma -->
+    <section id="cronograma">
+        <div class="section-title">
+            <h2>Programação</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-time">15:30</div>
+                    <p>Início da Cerimônia</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-time">17:00</div>
+                    <p>Sessão de Fotos do Casal</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-time">17:30</div>
+                    <p>Fotos com os Convidados</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-time">18:00</div>
+                    <p>Abertura da Pista de Dança</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-time">19:30</div>
+                    <p>Momento do Buquê</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-time">20:30</div>
+                    <p>Lembranças, Bolo e Doces</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-time">21:00</div>
+                    <p>Encerramento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dress Code -->
+    <section id="dresscode">
+        <div class="section-title">
+            <h2>Dress Code</h2>
+        </div>
+        <div class="dress-code-box">
+            <h3>Esporte Fino</h3>
+            <p>Preparem-se para celebrar e dançar conosco em trajes elegantes e confortáveis.</p>
+            <div class="warning-text">
+                <strong>Importante:</strong> NINGUÉM pode ir de branco! Caso contrário, haverá risco real de vinho jogado na roupa pela irmã da noiva! 😉🍷
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP / Confirmação -->
+    <section id="rsvp">
+        <div class="section-title">
+            <h2>Confirmação de Presença</h2>
+        </div>
+        <div class="rsvp-container">
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.95rem; color: #666;">
+                Digite seu nome abaixo para localizar seu convite e confirmar sua presença.
+            </p>
+
+            <!-- Campo de Busca do Titular -->
+            <div class="search-box" id="mainSearchBox">
+                <input type="text" id="guestSearch" placeholder="Digite seu nome completo..." autocomplete="off">
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+
+            <!-- Área de Confirmação -->
+            <div id="confirmationArea" style="display: none;">
+                <div class="selected-guest">
+                    <p style="font-size: 0.85rem; color: var(--marrom-claro); text-transform: uppercase; font-weight: bold;">Convidado Principal:</p>
+                    <h4 id="selectedGuestName"></h4>
+                </div>
+
+                <!-- Adicionar Acompanhante -->
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 0.9rem; font-weight: 600; color: var(--marrom-escuro);">Irá acompanhado(a)? Adicione outros convidados da lista:</label>
+                    <p style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">*(Apenas nomes presentes na lista oficial podem ser adicionados)*</p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="companionSearch" placeholder="Buscar nome do acompanhante na lista..." autocomplete="off">
+                        <div class="suggestions" id="companionSuggestions"></div>
+                    </div>
+
+                    <div class="companions-list" id="companionsList"></div>
+                </div>
+
+                <button class="btn" id="submitRsvpBtn" onclick="submitRSVP()">Confirmar Presença</button>
+                <div class="status-msg" id="statusMsg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Leandro & Laura • 2027</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">Mal podemos esperar para comemorar com vocês!</p>
+    </footer>
+
+    <script>
+        // LISTA OFICIAL DE CONVIDADOS
+        const guestList = [
+            "Adalto Silva", "Adenilza Dias", "Adriano Santana", "Alan Guimarães", "Aleandro Borges",
+            "Alice Malek", "Alice Tavares", "Aline Guimarães", "Ana Beatriz Silva", "Ana Guimarães",
+            "Ana Tavares", "Andressa Andrade", "Andreza", "Bya Berriel", "Camila Buy", "Camilla Alves",
+            "Camille Silva", "Carol Malek", "Clara Moreira", "Cleber Borges", "Cleber Moreira",
+            "Clecilda Berriel", "Cleide Malek", "Clenilda Barcelos", "Diego Soares", "Dilza Borges",
+            "Dozinha Malek", "Elaine Malek", "Evelyn santos", "Fabian Silva", "Farley Malek", "Filha",
+            "Francisco de Assis", "Gabriel Borges", "Gabriela Borges", "Gilson Berriel", "Gracilene Silva",
+            "Guilherme Vieira", "Ilan Tavares", "Ingrid Pereira", "Isabelle Soares", "Jackson Soares",
+            "João Cantanhede", "Joarez Soares", "Joyce", "Juliana Malek", "Kallel Moreira", "Kamilla Almeida",
+            "Karyne Borges", "Kauã Santana", "Kelly Malek", "Keyven Louise", "Laís Guimarães", "Laura Araújo",
+            "Leandro Malek", "Levy Natã", "Lorena Malek", "Luan Alves", "Lucas Gabriel", "Lucas madeira",
+            "Lucélia Guimarães", "Lúcia Borges", "Luís Carlos Malek", "Luís Henrique Malek", "Luís Otávio Valgas",
+            "Madalena Malek", "Malu Santos", "Marcella Vieira", "Marilha Guimarães", "Mateus Souza",
+            "Millena Malek", "Miquéias Figueiredo", "Nilciléia Barcelos", "Nilcilene Barcelos", "Nilda Barcelos",
+            "Nildicéia Rodrigues", "Nivaldo Júnior", "Nivaldo Rodrigues", "Nivea Lessa", "Osvaldo Rodrigues",
+            "Pablo Barbosa", "Patrícia Faustino", "Pedro Berriel", "Pedro Malek", "Queila Santana",
+            "Rafaela Guimarães", "Raphael Limeira", "Renan Malek", "Renata Tavares", "Robert", "Robson Malek",
+            "Santana Pereira", "Sophia Almeida", "Tatiana Malek", "Thamyres Neves", "Thiago Berriel",
+            "Tiago Almeida", "Vagner Malek", "Valbenir Guimarães", "Valéria Malek", "Wagner Vieira", "William"
+        ];
+
+        // URL DO SEU GOOGLE APPS SCRIPT
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxPrlGaxGZq6XpdA0c3s08bhYdK7UV-y2XZ5EWvqKUrRXHw2G-rtqe06scjw3e7jl260g/exec"; 
+
+        let selectedMainGuest = "";
+        let selectedCompanions = [];
+
+        function normalizeText(text) {
+            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
+        const guestSearchInput = document.getElementById("guestSearch");
+        const suggestionsBox = document.getElementById("suggestions");
+        const confirmationArea = document.getElementById("confirmationArea");
+        const selectedGuestNameEl = document.getElementById("selectedGuestName");
+        
+        const companionSearchInput = document.getElementById("companionSearch");
+        const companionSuggestionsBox = document.getElementById("companionSuggestions");
+        const companionsListEl = document.getElementById("companionsList");
+        const statusMsg = document.getElementById("statusMsg");
+
+        guestSearchInput.addEventListener("input", function() {
+            const query = normalizeText(this.value);
+            suggestionsBox.innerHTML = "";
+            if (query.length < 2) return;
+
+            const filtered = guestList.filter(name => normalizeText(name).includes(query));
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.className = "suggestion-item";
+                div.textContent = name;
+                div.onclick = function() { selectMainGuest(name); };
+                suggestionsBox.appendChild(div);
+            });
+        });
+
+        function selectMainGuest(name) {
+            selectedMainGuest = name;
+            selectedGuestNameEl.textContent = name;
+            guestSearchInput.value = name;
+            suggestionsBox.innerHTML = "";
+            document.getElementById("mainSearchBox").style.display = "none";
+            confirmationArea.style.display = "block";
+        }
+
+        companionSearchInput.addEventListener("input", function() {
+            const query = normalizeText(this.value);
+            companionSuggestionsBox.innerHTML = "";
+            if (query.length < 2) return;
+
+            const filtered = guestList.filter(name => 
+                normalizeText(name).includes(query) && 
+                name !== selectedMainGuest && 
+                !selectedCompanions.includes(name)
+            );
+
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.className = "suggestion-item";
+                div.textContent = name;
+                div.onclick = function() { addCompanion(name); };
+                companionSuggestionsBox.appendChild(div);
+            });
+        });
+
+        function addCompanion(name) {
+            selectedCompanions.push(name);
+            companionSearchInput.value = "";
+            companionSuggestionsBox.innerHTML = "";
+            renderCompanions();
+        }
+
+        function removeCompanion(name) {
+            selectedCompanions = selectedCompanions.filter(c => c !== name);
+            renderCompanions();
+        }
+
+        function renderCompanions() {
+            companionsListEl.innerHTML = "";
+            selectedCompanions.forEach(name => {
+                const chip = document.createElement("div");
+                chip.className = "companion-chip";
+                chip.innerHTML = `${name} <span onclick="removeCompanion('${name}')">&times;</span>`;
+                companionsListEl.appendChild(chip);
+            });
+        }
+
+        // ENVIAR DADOS PARA O GOOGLE SHEETS
+        function submitRSVP() {
+            const btn = document.getElementById("submitRsvpBtn");
+            btn.disabled = true;
+            btn.textContent = "Enviando...";
+            statusMsg.style.display = "none";
+
+            const payload = {
+                convidado: selectedMainGuest,
+                acompanhantes: selectedCompanions
+            };
+
+            fetch(scriptURL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                statusMsg.className = "status-msg status-success";
+                statusMsg.textContent = "Presença confirmada com sucesso! Obrigado!";
+                statusMsg.style.display = "block";
+                btn.style.display = "none";
+            })
+            .catch(error => {
+                statusMsg.className = "status-msg status-error";
+                statusMsg.textContent = "Erro ao enviar confirmação. Tente novamente.";
+                statusMsg.style.display = "block";
+                btn.disabled = false;
+                btn.textContent = "Confirmar Presença";
+            });
+        }
+    </script>
+</body>
+</html>
