@@ -64,8 +64,8 @@
             font-family: 'Cinzel', serif;
             text-decoration: none;
             color: var(--marrom-escuro);
-            margin: 0 15px;
-            font-size: 0.9rem;
+            margin: 0 10px;
+            font-size: 0.85rem;
             letter-spacing: 1px;
             transition: color 0.3s ease;
         }
@@ -279,27 +279,139 @@
             font-size: 0.95rem;
         }
 
-        /* BOTÃO RSVP & LISTA */
+        /* RSVP SISTEMA */
+        .rsvp-container {
+            background-color: var(--branco);
+            border: 1px solid var(--palha-dark);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--palha-dark);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--marrom-claro);
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--branco);
+            border: 1px solid var(--palha-dark);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .suggestion-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--palha-base);
+        }
+
+        .suggestion-item:hover {
+            background-color: var(--palha-base);
+        }
+
+        .selected-guest {
+            background-color: var(--palha-base);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--palha-dark);
+        }
+
+        .selected-guest h4 {
+            color: var(--marrom-escuro);
+            margin-bottom: 5px;
+        }
+
+        .companions-list {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .companion-chip {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--marrom-claro);
+            color: var(--branco);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 4px;
+        }
+
+        .companion-chip span {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         .btn {
             display: inline-block;
+            width: 100%;
             background-color: var(--marrom-base);
             color: var(--branco);
-            padding: 14px 32px;
+            padding: 14px 20px;
             text-decoration: none;
             font-family: 'Cinzel', serif;
             letter-spacing: 1px;
+            border: none;
             border-radius: 4px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
         }
 
         .btn:hover {
             background-color: var(--marrom-escuro);
-            transform: translateY(-2px);
         }
 
-        .center-btn {
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 4px;
             text-align: center;
+            display: none;
+        }
+
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         /* RODAPÉ */
@@ -312,7 +424,6 @@
             font-size: 0.9rem;
         }
 
-        /* RESPONSIVO */
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .timeline::before { left: 31px; }
@@ -366,7 +477,6 @@
                 <p>São Gonçalo - RJ, 24756-430</p>
             </div>
             <div class="map-container">
-                <!-- Google Maps Embed -->
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.023412345678!2d-42.980000!3d-22.820000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99999999999999%3A0x0!2sRua%20Expedicion%C3%A1rio%20Luis%20Lopes%20Dorneles%2C%202%20-%20S%C3%A3o%20Gon%C3%A7alo!5e0!3m2!1spt-BR!2sbr!4v1600000000000" 
                     allowfullscreen="" 
@@ -446,10 +556,40 @@
         <div class="section-title">
             <h2>Confirmação de Presença</h2>
         </div>
-        <div style="text-align: center;">
-            <p>Sua presença é fundamental para tornar nosso dia inesquecível. Por favor, confirme até o dia 12/11/2027.</p>
-            <!-- Substitua o # abaixo pelo link do seu Google Forms ou WhatsApp -->
-            <a href="#" target="_blank" class="btn">Confirmar Minha Presença</a>
+        <div class="rsvp-container">
+            <p style="text-align: center; margin-bottom: 20px; font-size: 0.95rem; color: #666;">
+                Digite seu nome abaixo para localizar seu convite e confirmar sua presença.
+            </p>
+
+            <!-- Campo de Busca do Titular -->
+            <div class="search-box" id="mainSearchBox">
+                <input type="text" id="guestSearch" placeholder="Digite seu nome completo..." autocomplete="off">
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+
+            <!-- Área de Confirmação -->
+            <div id="confirmationArea" style="display: none;">
+                <div class="selected-guest">
+                    <p style="font-size: 0.85rem; color: var(--marrom-claro); text-transform: uppercase; font-weight: bold;">Convidado Principal:</p>
+                    <h4 id="selectedGuestName"></h4>
+                </div>
+
+                <!-- Adicionar Acompanhante -->
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 0.9rem; font-weight: 600; color: var(--marrom-escuro);">Irá acompanhado(a)? Adicione outros convidados da lista:</label>
+                    <p style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">*(Apenas nomes presentes na lista oficial podem ser adicionados)*</p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="companionSearch" placeholder="Buscar nome do acompanhante na lista..." autocomplete="off">
+                        <div class="suggestions" id="companionSuggestions"></div>
+                    </div>
+
+                    <div class="companions-list" id="companionsList"></div>
+                </div>
+
+                <button class="btn" id="submitRsvpBtn" onclick="submitRSVP()">Confirmar Presença</button>
+                <div class="status-msg" id="statusMsg"></div>
+            </div>
         </div>
     </section>
 
@@ -459,5 +599,148 @@
         <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">Mal podemos esperar para comemorar com vocês!</p>
     </footer>
 
+    <script>
+        // LISTA OFICIAL DE CONVIDADOS
+        const guestList = [
+            "Adalto Silva", "Adenilza Dias", "Adriano Santana", "Alan Guimarães", "Aleandro Borges",
+            "Alice Malek", "Alice Tavares", "Aline Guimarães", "Ana Beatriz Silva", "Ana Guimarães",
+            "Ana Tavares", "Andressa Andrade", "Andreza", "Bya Berriel", "Camila Buy", "Camilla Alves",
+            "Camille Silva", "Carol Malek", "Clara Moreira", "Cleber Borges", "Cleber Moreira",
+            "Clecilda Berriel", "Cleide Malek", "Clenilda Barcelos", "Diego Soares", "Dilza Borges",
+            "Dozinha Malek", "Elaine Malek", "Evelyn santos", "Fabian Silva", "Farley Malek", "Filha",
+            "Francisco de Assis", "Gabriel Borges", "Gabriela Borges", "Gilson Berriel", "Gracilene Silva",
+            "Guilherme Vieira", "Ilan Tavares", "Ingrid Pereira", "Isabelle Soares", "Jackson Soares",
+            "João Cantanhede", "Joarez Soares", "Joyce", "Juliana Malek", "Kallel Moreira", "Kamilla Almeida",
+            "Karyne Borges", "Kauã Santana", "Kelly Malek", "Keyven Louise", "Laís Guimarães", "Laura Araújo",
+            "Leandro Malek", "Levy Natã", "Lorena Malek", "Luan Alves", "Lucas Gabriel", "Lucas madeira",
+            "Lucélia Guimarães", "Lúcia Borges", "Luís Carlos Malek", "Luís Henrique Malek", "Luís Otávio Valgas",
+            "Madalena Malek", "Malu Santos", "Marcella Vieira", "Marilha Guimarães", "Mateus Souza",
+            "Millena Malek", "Miquéias Figueiredo", "Nilciléia Barcelos", "Nilcilene Barcelos", "Nilda Barcelos",
+            "Nildicéia Rodrigues", "Nivaldo Júnior", "Nivaldo Rodrigues", "Nivea Lessa", "Osvaldo Rodrigues",
+            "Pablo Barbosa", "Patrícia Faustino", "Pedro Berriel", "Pedro Malek", "Queila Santana",
+            "Rafaela Guimarães", "Raphael Limeira", "Renan Malek", "Renata Tavares", "Robert", "Robson Malek",
+            "Santana Pereira", "Sophia Almeida", "Tatiana Malek", "Thamyres Neves", "Thiago Berriel",
+            "Tiago Almeida", "Vagner Malek", "Valbenir Guimarães", "Valéria Malek", "Wagner Vieira", "William"
+        ];
+
+        // URL DO SEU GOOGLE APPS SCRIPT
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxPrlGaxGZq6XpdA0c3s08bhYdK7UV-y2XZ5EWvqKUrRXHw2G-rtqe06scjw3e7jl260g/exec"; 
+
+        let selectedMainGuest = "";
+        let selectedCompanions = [];
+
+        function normalizeText(text) {
+            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
+        const guestSearchInput = document.getElementById("guestSearch");
+        const suggestionsBox = document.getElementById("suggestions");
+        const confirmationArea = document.getElementById("confirmationArea");
+        const selectedGuestNameEl = document.getElementById("selectedGuestName");
+        
+        const companionSearchInput = document.getElementById("companionSearch");
+        const companionSuggestionsBox = document.getElementById("companionSuggestions");
+        const companionsListEl = document.getElementById("companionsList");
+        const statusMsg = document.getElementById("statusMsg");
+
+        guestSearchInput.addEventListener("input", function() {
+            const query = normalizeText(this.value);
+            suggestionsBox.innerHTML = "";
+            if (query.length < 2) return;
+
+            const filtered = guestList.filter(name => normalizeText(name).includes(query));
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.className = "suggestion-item";
+                div.textContent = name;
+                div.onclick = function() { selectMainGuest(name); };
+                suggestionsBox.appendChild(div);
+            });
+        });
+
+        function selectMainGuest(name) {
+            selectedMainGuest = name;
+            selectedGuestNameEl.textContent = name;
+            guestSearchInput.value = name;
+            suggestionsBox.innerHTML = "";
+            document.getElementById("mainSearchBox").style.display = "none";
+            confirmationArea.style.display = "block";
+        }
+
+        companionSearchInput.addEventListener("input", function() {
+            const query = normalizeText(this.value);
+            companionSuggestionsBox.innerHTML = "";
+            if (query.length < 2) return;
+
+            const filtered = guestList.filter(name => 
+                normalizeText(name).includes(query) && 
+                name !== selectedMainGuest && 
+                !selectedCompanions.includes(name)
+            );
+
+            filtered.forEach(name => {
+                const div = document.createElement("div");
+                div.className = "suggestion-item";
+                div.textContent = name;
+                div.onclick = function() { addCompanion(name); };
+                companionSuggestionsBox.appendChild(div);
+            });
+        });
+
+        function addCompanion(name) {
+            selectedCompanions.push(name);
+            companionSearchInput.value = "";
+            companionSuggestionsBox.innerHTML = "";
+            renderCompanions();
+        }
+
+        function removeCompanion(name) {
+            selectedCompanions = selectedCompanions.filter(c => c !== name);
+            renderCompanions();
+        }
+
+        function renderCompanions() {
+            companionsListEl.innerHTML = "";
+            selectedCompanions.forEach(name => {
+                const chip = document.createElement("div");
+                chip.className = "companion-chip";
+                chip.innerHTML = `${name} <span onclick="removeCompanion('${name}')">&times;</span>`;
+                companionsListEl.appendChild(chip);
+            });
+        }
+
+        // ENVIAR DADOS PARA O GOOGLE SHEETS
+        function submitRSVP() {
+            const btn = document.getElementById("submitRsvpBtn");
+            btn.disabled = true;
+            btn.textContent = "Enviando...";
+            statusMsg.style.display = "none";
+
+            const payload = {
+                convidado: selectedMainGuest,
+                acompanhantes: selectedCompanions
+            };
+
+            fetch(scriptURL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                statusMsg.className = "status-msg status-success";
+                statusMsg.textContent = "Presença confirmada com sucesso! Obrigado!";
+                statusMsg.style.display = "block";
+                btn.style.display = "none";
+            })
+            .catch(error => {
+                statusMsg.className = "status-msg status-error";
+                statusMsg.textContent = "Erro ao enviar confirmação. Tente novamente.";
+                statusMsg.style.display = "block";
+                btn.disabled = false;
+                btn.textContent = "Confirmar Presença";
+            });
+        }
+    </script>
 </body>
 </html>
